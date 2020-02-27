@@ -9,7 +9,7 @@ const app = express();
 dotenv.config({ path: './config/config.env' });
 
 // Connect MongoDB
-connectDB();
+// connectDB();
 
 // Body parser
 app.use(express.json());
@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 // Static folder
 // app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
+app.use('/api/v1/bootcamps', require('./routes/bootcamps'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
