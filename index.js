@@ -13,7 +13,7 @@ connectDB();
 const app = express();
 
 // Body parser
-// app.use(express.json());
+app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
 // Enable cors
@@ -23,7 +23,7 @@ const app = express();
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // Dev logging middleware
-// if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // Routes
 app.use('/api/v1/bootcamps', require('./routes/bootcamps'));
