@@ -4,7 +4,7 @@
   "description": "Devcamper backend API",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index",
+    "start": "SET NODE_ENV=production&node index",
     "dev": "nodemon index"
   },
   "keywords": [],
