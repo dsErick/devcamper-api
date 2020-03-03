@@ -11,7 +11,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
     // Verify if bootcamp id is passed as a param
     req.params.bootcampId ?
         query = Course.find({ bootcamp: req.params.bootcampId }) :
-        query = Course.find();
+        query = Course.find().populate({ path: 'bootcamp', select: 'name description' });
 
     const courses = await query;
      
@@ -29,9 +29,9 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 exports.getCourse = asyncHandler(async (req, res, next) => {
     let query;
 
-    if (req.params.bootcampId)
-        query = Course.findOne({ _id: req.params.id, bootcamp: req.params.bootcampId });
-    else query = Course.findById(req.params.id);
+    req.params.bootcampId ?
+        query = Course.findOne({ _id: req.params.id, bootcamp: req.params.bootcampId }) :
+        query = Course.findById(req.params.id);
 
     const course = await query;
 
