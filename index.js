@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // Routes
 app.use('/api/v1/bootcamps', require('./routes/bootcamps'));
+app.use('/api/v1/courses', require('./routes/courses'));
 
 // Custom Error Handler
 app.use(errorHandler);
