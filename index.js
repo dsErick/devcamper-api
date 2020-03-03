@@ -26,7 +26,7 @@ app.use(express.json());
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
-// Routes
+// Mount Routers
 app.use('/api/v1/bootcamps', require('./routes/bootcamps'));
 app.use('/api/v1/courses', require('./routes/courses'));
 
