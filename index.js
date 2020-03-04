@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
@@ -19,6 +20,9 @@ app.use(express.json());
 
 // Fileupload
 app.use(fileUpload());
+
+// Cookie Parser
+app.use(cookieParser());
 
 // Enable cors
 // app.use(cors());
