@@ -14,11 +14,9 @@ const Bootcamp = require('../models/Bootcamp');
 const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 
-// Include other resource routers
-// const courseRouter = require('./courses');
-
 // Re-route into other resource routers
 router.use('/:bootcampId/courses', require('./courses'));
+router.use('/:bootcampId/reviews', require('./reviews'));
 
 // Routes
 router.route('/radius/:zipcode/:distance')
