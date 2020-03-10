@@ -3,6 +3,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
@@ -26,6 +29,15 @@ app.use(cookieParser());
 
 // Enable cors
 // app.use(cors());
+
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS (Cross Site Scripting) attacks
+app.use(xss());
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
