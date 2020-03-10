@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+// const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
@@ -19,7 +22,7 @@ connectDB();
 const app = express();
 
 // Body parser
-app.use(express.json());
+/* app.use(express.json());
 
 // Fileupload
 app.use(fileUpload());
@@ -28,7 +31,7 @@ app.use(fileUpload());
 app.use(cookieParser());
 
 // Enable cors
-// app.use(cors());
+app.use(cors());
 
 // Sanitize data
 app.use(mongoSanitize());
@@ -39,8 +42,35 @@ app.use(helmet());
 // Prevent XSS (Cross Site Scripting) attacks
 app.use(xss());
 
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 mins
+    max: 100
+});
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
+*/
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 mins
+    max: 100
+});
+app.use(
+    express.json(),     // Body parser
+    cookieParser(),     // Cookie Parser
+    fileUpload(),       // Fileupload
+    mongoSanitize(),    // Sanitize data
+    helmet(),           // Set security headers
+    xss(),              // Prevent XSS (Cross Site Scripting) attacks
+    limiter,            // Rate limiting
+    hpp(),              // Prevent http param pollution
+    // cors(),          // Enable cors
+    express.static(path.join(__dirname, 'public')) // Static folder
+);
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
