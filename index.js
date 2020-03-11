@@ -21,48 +21,15 @@ connectDB();
 
 const app = express();
 
-// Body parser
-/* app.use(express.json());
-
-// Fileupload
-app.use(fileUpload());
-
-// Cookie Parser
-app.use(cookieParser());
-
-// Enable cors
-app.use(cors());
-
-// Sanitize data
-app.use(mongoSanitize());
-
-// Set security headers
-app.use(helmet());
-
-// Prevent XSS (Cross Site Scripting) attacks
-app.use(xss());
-
-// Rate limiting
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
     max: 100
 });
-app.use(limiter);
 
-// Prevent http param pollution
-app.use(hpp());
-
-// Static folder
-app.use(express.static(path.join(__dirname, 'public')));
-*/
-const limiter = rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 mins
-    max: 100
-});
 app.use(
     express.json(),     // Body parser
-    cookieParser(),     // Cookie Parser
     fileUpload(),       // Fileupload
+    cookieParser(),     // Cookie Parser
     mongoSanitize(),    // Sanitize data
     helmet(),           // Set security headers
     xss(),              // Prevent XSS (Cross Site Scripting) attacks
