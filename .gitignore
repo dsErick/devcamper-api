@@ -1,4 +1,4 @@
 node_modules/
 config/config.env
 resumo.js
-_data/
+.DS_STORE
